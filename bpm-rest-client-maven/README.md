@@ -1,3 +1,7 @@
+*bpm-rest-client-maven*
+===================
+Antes que nada, esta es una adaptación de un proyecto ya existente; lo que he hecho yo es pasarlo a maven con depedencias propias de esta herramienta.
+
 Para que este proyecto funcione es necesario agregar a nuestro repositorio de dependencias el jar ```com.ibm.ws.runtime.jar``` que se encuentra dentro de la instalación del portal.
 
 Se ejecuta la siguiente sentencia para agregar dicho jar a nuestro repositorio
