@@ -3,7 +3,7 @@ Para que este proyecto funcione es necesario agregar a nuestro repositorio de de
 Se ejecuta la siguiente sentencia para agregar dicho jar a nuestro repositorio
 
 	mvn install:install-file -Dfile=d:\temp\jars\com.ibm.ws.runtime.jar -DgroupId=com.ibm.ws.runtime \ 
-		-DartifactId=runtime -Dversion=1.0 -Dpackaging=jar ```
+		-DartifactId=runtime -Dversion=1.0 -Dpackaging=jar
 
 Se agregará luego la siguiente declaración en nuestro archivo POM.
 
