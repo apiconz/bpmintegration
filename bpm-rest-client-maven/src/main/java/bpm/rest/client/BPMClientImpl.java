@@ -78,6 +78,10 @@ public class BPMClientImpl implements BPMClient {
 		try {
 			Properties props = new Properties();
 			props.load(this.getClass().getResourceAsStream(propsFile));
+			
+
+			System.out.println("hito!!!!!!");
+			
 			String URI = (uri != null) ? uri : props.getProperty("uri",
 					"/rest/bpm/wle/v1");
 			int readTimeOut = Integer.valueOf(props.getProperty("readTimeOut",
