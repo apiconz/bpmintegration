@@ -185,9 +185,12 @@ public class GenericClient {
 		} finally {
 			try {
 				if (httpClient != null)
+					System.out.println("va a parar el httpClient");
 					httpClient.stop();
 			} catch (Exception e) {
 				// throw new BPMClientException(e.getMessage());
+				
+				System.out.println("paso por excepcion que no hace nada");
 			}
 		}
 	}
