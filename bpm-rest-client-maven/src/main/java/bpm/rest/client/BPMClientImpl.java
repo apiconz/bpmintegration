@@ -18,7 +18,7 @@ public class BPMClientImpl implements BPMClient {
 	private String columns[] = { "instanceId", "bpdName", "instanceStatus",
 			"instanceProcessApp", "assignedToUser", "assignedToRole",
 			"taskStatus", "taskDueDate", "taskPriority", "taskReceivedDate",
-			"taskActivityName" };
+			"taskActivityName","department", "hiringManager" };
 	private GenericClient client;
 
 	/**
