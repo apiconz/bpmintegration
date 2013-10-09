@@ -285,9 +285,6 @@ public class BPMClientImpl implements BPMClient {
 			AuthenticationTokenHandlerException {
 		String conditions[] = { "taskStatus|New_or_Received" };
 		return search(columns, conditions, "byInstance", "instanceId", "taskId");
-
-		// relativePath = "/search/meta/businessData";
-		// return client.executeRESTCall(relativePath, null, Method.GET);
 	}
 
 	
@@ -308,6 +305,14 @@ public class BPMClientImpl implements BPMClient {
 		arguments.put("script", js);
 		client.executeRESTCall("/process/" + processId, arguments, Method.PUT,
 				false);
+	}
+	
+	public JSONObject getExposedProcess()throws BPMClientException,
+	AuthenticationTokenHandlerException {
+System.out.println("--->getExposedProcess");
+		Map<String, Object> arguments = new HashMap<String, Object>();
+		return client.executeRESTCall("/exposed/process", arguments, Method.GET, true);
+		
 	}
 
 }

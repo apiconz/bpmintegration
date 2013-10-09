@@ -118,13 +118,15 @@ public class GenericClient {
 			Map<String, Object> arguments, Method method,
 			boolean putContentInBody) throws BPMClientException,
 			AuthenticationTokenHandlerException {
-
+		System.out.println("--->executeRESTCall");
 		// Prepare the request object
 		String url;
 		Request request;
 		if (putContentInBody) {
 			url = buildURL(relativePath, null);
 			String requestBody = encodeArguments(arguments, true);
+			System.out.println("HTTP call: " + url);
+			System.out.println("Request body: " + requestBody);
 			LOGGER.log(Level.INFO, "HTTP call: " + url);
 			LOGGER.log(Level.INFO, "Request body: " + requestBody);
 			StringRepresentation sp = new StringRepresentation(requestBody);
@@ -132,6 +134,7 @@ public class GenericClient {
 			request = new Request(method, url, sp);
 		} else {
 			url = buildURL(relativePath, arguments);
+			System.out.println("HTTP call: " + url);
 			LOGGER.log(Level.INFO, "HTTP call: " + url);
 			request = new Request(method, url);
 			// The following is to avoid 411 error on certain servers that
@@ -172,11 +175,13 @@ public class GenericClient {
 				handler.reset();
 				reauthenticating = true;
 				try {
+					System.out.println("Reauthenticating...");
 					LOGGER.log(Level.WARNING, "Reauthenticating...");
 					return executeRESTCall(relativePath, arguments, method,
 							putContentInBody);
 				} finally {
 					reauthenticating = false;
+					System.out.println("Reauthenticating attempt completed...");
 					LOGGER.log(Level.WARNING,
 							"Reauthenticating attempt completed...");
 				}

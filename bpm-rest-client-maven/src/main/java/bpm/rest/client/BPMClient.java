@@ -196,4 +196,6 @@ public interface BPMClient {
 	public void executeJS(int processId, String js) throws BPMClientException,
 			AuthenticationTokenHandlerException;
 
+	public JSONObject getExposedProcess() throws BPMClientException,
+			AuthenticationTokenHandlerException;
 }

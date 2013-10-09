@@ -13,6 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<github.global.server>github</github.global.server>
+		<restlet.libtype>org.restlet.jee</restlet.libtype>
 	</properties>
 
 	<dependencies>
@@ -25,13 +26,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.restlet.jee</groupId>
+			<groupId>${restlet.libtype}</groupId>
 			<artifactId>org.restlet</artifactId>
 			<version>2.1.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.restlet.jee</groupId>
+			<groupId>${restlet.libtype}</groupId>
 			<artifactId>org.restlet.ext.json</artifactId>
 			<version>2.1.0</version>
 		</dependency>
@@ -45,7 +46,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -56,6 +57,19 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+
+	<profiles>
+		<profile>
+			<id>my-profile</id>
+			<properties>
+				<restlet.libtype>org.restlet.jse</restlet.libtype>
+			</properties>
+			<build>
+				<defaultGoal>test</defaultGoal>
+			</build>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
@@ -95,7 +109,7 @@
 		</plugins>
 
 	</build>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>github</id>
@@ -111,5 +125,5 @@
 			<url>http://maven.restlet.org</url>
 		</repository>
 	</repositories>
-	
+
 </project>
