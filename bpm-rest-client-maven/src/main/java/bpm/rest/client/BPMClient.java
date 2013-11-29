@@ -168,6 +168,10 @@ public interface BPMClient {
 	public JSONObject getInbox() throws BPMClientException,
 			AuthenticationTokenHandlerException;
 
+	
+	public JSONObject getHistorical() throws BPMClientException,
+	AuthenticationTokenHandlerException;
+	
 	public JSONObject getTasks(String bpdName) throws BPMClientException,
 			AuthenticationTokenHandlerException;
 

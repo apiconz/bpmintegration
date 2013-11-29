@@ -33,6 +33,8 @@ import org.restlet.engine.header.HeaderConstants;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
+import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 import org.restlet.util.Series;
 
 import bpm.rest.client.authentication.AuthenticationTokenHandler;
@@ -47,14 +49,12 @@ public class GenericClient {
 	private String protocol;
 	private int port;
 	private String uri;
-	// private final String urlPattern;
 	private boolean useSSL;
 	private AuthenticationTokenHandler handler;
 	private boolean reauthenticating = false;
 	private int readTimeOut;
 	private int connectionTimeOut;
 
-	// private Client httpClient;
 
 	/**
 	 * Invoking this constructor is the same as invoking the primary constructor
@@ -92,12 +92,9 @@ public class GenericClient {
 		this.uri = uri;
 		this.useSSL = useSSL;
 		protocol = (useSSL) ? "https" : "http";
-		// this.urlPattern = protocol + "://" + hostname + ':' + port + uri
-		// + "{0}";
 		this.handler = handler;
 		this.readTimeOut = readTimeOut;
 		this.connectionTimeOut = connectionTimeOut;
-		// this.httpClient = new Client(Protocol.HTTP);
 	}
 
 	@Override
@@ -109,8 +106,6 @@ public class GenericClient {
 		buffer.append(port);
 		buffer.append(", uri: ");
 		buffer.append(uri);
-		// buffer.append(", url pattern: ");
-		// buffer.append(urlPattern);
 		return buffer.toString();
 	}
 
@@ -273,7 +268,6 @@ public class GenericClient {
 		@SuppressWarnings("unchecked")
 		Series<Header> header = (Series<Header>) attributes
 				.get(HeaderConstants.ATTRIBUTE_HEADERS);
-		// Form form = (Form) attributes.get("org.restlet.http.headers");
 		if (header != null) {
 			String contentType = header.getValues("Content-Type");
 			if (contentType != null) {
@@ -452,4 +446,6 @@ public class GenericClient {
 			LOGGER.log(Level.SEVERE, "\nEnd Exception info");
 		}
 	}
+	
+	
 }

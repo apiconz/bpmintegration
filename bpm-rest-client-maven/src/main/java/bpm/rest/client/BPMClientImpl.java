@@ -18,7 +18,7 @@ public class BPMClientImpl implements BPMClient {
 	private String columns[] = { "instanceId", "bpdName", "instanceStatus",
 			"instanceProcessApp", "assignedToUser", "assignedToRole",
 			"taskStatus", "taskDueDate", "taskPriority", "taskReceivedDate",
-			"taskActivityName","department", "hiringManager" };
+			"taskActivityName", "department", "hiringManager" };
 	private GenericClient client;
 
 	/**
@@ -78,10 +78,9 @@ public class BPMClientImpl implements BPMClient {
 		try {
 			Properties props = new Properties();
 			props.load(this.getClass().getResourceAsStream(propsFile));
-			
 
 			System.out.println("hito!!!!!!");
-			
+
 			String URI = (uri != null) ? uri : props.getProperty("uri",
 					"/rest/bpm/wle/v1");
 			int readTimeOut = Integer.valueOf(props.getProperty("readTimeOut",
@@ -170,7 +169,6 @@ public class BPMClientImpl implements BPMClient {
 		}
 	}
 
-	
 	public JSONObject startTask(int taskId) throws BPMClientException,
 			AuthenticationTokenHandlerException {
 		Map<String, Object> args = new HashMap<String, Object>();
@@ -178,7 +176,6 @@ public class BPMClientImpl implements BPMClient {
 		return client.executeRESTCall("/task/" + taskId, args, Method.POST,
 				false);
 	}
-
 
 	public JSONObject finishTask(int taskId, JSONObject arguments)
 			throws BPMClientException, AuthenticationTokenHandlerException {
@@ -192,7 +189,6 @@ public class BPMClientImpl implements BPMClient {
 				false);
 	}
 
-	
 	public JSONObject getExternalActivityModel(String externalActivityId)
 			throws BPMClientException, AuthenticationTokenHandlerException {
 		return client.executeRESTCall("/externalactivity/" + externalActivityId
@@ -205,7 +201,6 @@ public class BPMClientImpl implements BPMClient {
 				false);
 	}
 
-	
 	public JSONObject search(String columns[], String conditions[],
 			String organization, String firstColumnSort, String secondColumnSort)
 			throws BPMClientException, AuthenticationTokenHandlerException {
@@ -222,7 +217,6 @@ public class BPMClientImpl implements BPMClient {
 				false);
 	}
 
-	
 	public JSONObject runBPD(String bpdId, String processAppId,
 			JSONObject arguments) throws BPMClientException,
 			AuthenticationTokenHandlerException {
@@ -237,7 +231,6 @@ public class BPMClientImpl implements BPMClient {
 		return client.executeRESTCall("/process", args, Method.POST, true);
 	}
 
-	
 	public JSONObject getBPDInstanceDetails(int instanceId)
 			throws BPMClientException, AuthenticationTokenHandlerException {
 
@@ -248,7 +241,6 @@ public class BPMClientImpl implements BPMClient {
 				Method.GET, false);
 	}
 
-	
 	public JSONObject assignTask(int taskId, String userid)
 			throws BPMClientException, AuthenticationTokenHandlerException {
 
@@ -259,7 +251,6 @@ public class BPMClientImpl implements BPMClient {
 				Method.POST, false);
 	}
 
-	
 	public JSONObject assignTask(int taskId) throws BPMClientException,
 			AuthenticationTokenHandlerException {
 
@@ -270,7 +261,6 @@ public class BPMClientImpl implements BPMClient {
 				Method.POST, false);
 	}
 
-	
 	public JSONObject returnTask(int taskId) throws BPMClientException,
 			AuthenticationTokenHandlerException {
 		Map<String, Object> arguments = new HashMap<String, Object>();
@@ -280,14 +270,17 @@ public class BPMClientImpl implements BPMClient {
 				Method.POST, false);
 	}
 
-	
 	public JSONObject getInbox() throws BPMClientException,
 			AuthenticationTokenHandlerException {
 		String conditions[] = { "taskStatus|New_or_Received" };
 		return search(columns, conditions, "byInstance", "instanceId", "taskId");
 	}
-
 	
+	public JSONObject getHistorical() throws BPMClientException, AuthenticationTokenHandlerException{
+		String conditions[] = {"taskStatus|NotEquals|New_or_Received"};
+		return search(columns, conditions, "byTask", "taskId", "instanceId");
+	}
+
 	public JSONObject getTasks(String bpdName) throws BPMClientException,
 			AuthenticationTokenHandlerException {
 		String conditions[] = { "taskStatus|New_or_Received",
@@ -296,7 +289,6 @@ public class BPMClientImpl implements BPMClient {
 		return search(columns, conditions, "byInstance", "instanceId", "taskId");
 	}
 
-	
 	public void executeJS(int processId, String js) throws BPMClientException,
 			AuthenticationTokenHandlerException {
 
@@ -306,13 +298,14 @@ public class BPMClientImpl implements BPMClient {
 		client.executeRESTCall("/process/" + processId, arguments, Method.PUT,
 				false);
 	}
-	
-	public JSONObject getExposedProcess()throws BPMClientException,
-	AuthenticationTokenHandlerException {
-System.out.println("--->getExposedProcess");
+
+	public JSONObject getExposedProcess() throws BPMClientException,
+			AuthenticationTokenHandlerException {
+		System.out.println("--->getExposedProcess");
 		Map<String, Object> arguments = new HashMap<String, Object>();
-		return client.executeRESTCall("/exposed/process", arguments, Method.GET, true);
-		
+		return client.executeRESTCall("/exposed/process", arguments,
+				Method.GET, true);
+
 	}
 
 }
